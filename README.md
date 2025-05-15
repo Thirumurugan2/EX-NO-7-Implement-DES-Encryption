@@ -1,48 +1,79 @@
-# EX-NO-6-Pseudo-Random-Number
+# EX-NO-7-Implement-DES-Encryption-and-Decryption
 
-# AIM: 
-Implementation of Pseudorandom Number Generation Using Standard library
+## Aim:
 
-# ALGORITHM:
-1.Start the program and import the required libraries.
+To use the Data Encryption Standard (DES) algorithm for a practical application, such as securing sensitive data transmission in financial transactions.
 
-2.Seed the random number generator using the current time (i.e) rand(time(0));
+## ALGORITHM:
 
-3.Get the number of random numbers to generate.
+1. DES is based on a symmetric key encryption technique that encrypts data in 64-bit blocks.
+2. DES uses a Feistel network structure with 16 rounds of processing for encryption.
+3. DES has a 64-bit key, but only 56 bits are used for encryption (the remaining 8 bits are for parity).
+4. DES applies initial and final permutations along with 16 rounds of substitution and permutation transformations to produce ciphertext.
 
-4.Pass the value for number of iterations and print the numbers.
-
-5.End the program.
-
-# PROGRAM:
-```c
+## Program:
+```
 #include <stdio.h>
-#include <stdlib.h>
-#include <time.h>
-
-int main() 
-{
-    int count, min, max;
-    printf("Enter the number of random numbers to generate: ");
-    scanf("%d", &count);
-    printf("Enter the minimum value: ");
-    
-    scanf("%d", &min);
-    printf("Enter the maximum value: ");
-    scanf("%d", &max);
-    srand(time(NULL));
-    printf("Pseudorandom numbers:\n");   
-    for (int i = 0; i < count; i++) 
-    {
-        int random_number = (rand() % (max - min + 1)) + min;
-        printf("%d\n", random_number);
-    }return 0;
-}
+ #include <string.h>
+ void encrypt(char *message, char *key, char *encryptedMessage, int
+ messageLength) {
+ int keyLength = strlen(key);
+ for (int i = 0; i < messageLength; i++) {
+ // Encrypt by XORing message byte with key byte
+ encryptedMessage[i] = message[i] ^ key[i % keyLength];
+ }
+ encryptedMessage[messageLength] = '\0'; 
+ }
+ // Function to perform decryption (XOR again with the same key)
+ void decrypt(char *encryptedMessage, char *key, char *decryptedMessage, int
+ messageLength) {
+ int keyLength = strlen(key);
+ for (int i = 0; i < messageLength; i++) {
+ // Decrypt by XORing encrypted byte with key byte
+ decryptedMessage[i] = encryptedMessage[i] ^ key[i % keyLength];
+ }
+ decryptedMessage[messageLength] = '\0'; // Null-terminate the decrypted
+ }
+ int main() {
+ char message[100];
+ char key[100];
+ printf("\n**Simulation of DES encryption and decryption\n\n");
+ // Get user input for the message
+ printf("Enter the message to encrypt: ");
+ fgets(message, sizeof(message), stdin);
+ message[strcspn(message, "\n")] = '\0'; // Remove newline character if present
+ // Get user input for the key
+ printf("Enter the encryption key: ");
+ fgets(key, sizeof(key), stdin);
+ key[strcspn(key, "\n")] = '\0'; // Remove newline character if present
+ int messageLength = strlen(message);
+ // Buffers to hold encrypted and decrypted messages
+ char encryptedMessage[100];
+ char decryptedMessage[100];
+ // Encrypt the message
+ encrypt(message, key, encryptedMessage, messageLength);
+ printf("Original Message: %s\n", message);
+ printf("Encrypted Message: ");
+ // Print encrypted message in hex format
+ for (int i = 0; i < messageLength; i++) {
+ printf("%02X ", (unsigned char)encryptedMessage[i]);
+ }
+ printf("\n");
+ // Decrypt the message
+ decrypt(encryptedMessage, key, decryptedMessage, messageLength);
+ printf("Decrypted Message: %s\n", decryptedMessage);
+ return 0;
+ }
 ```
 
-# OUTPUT:
-![image](https://github.com/user-attachments/assets/61f446f5-8126-4f54-8bc2-fc866ca138f3)
 
 
-# RESULT:
-The Implementation of Pseudorandom Number Generation Using Standard library issuccessful.
+
+## Output:
+![Screenshot 2025-04-25 133539](https://github.com/user-attachments/assets/5941d858-7954-4ce0-9d6a-1de913bd1a79)
+
+
+
+## Result:
+  The program is executed successfully
+
