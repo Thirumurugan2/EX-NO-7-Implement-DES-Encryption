@@ -1,24 +1,48 @@
-# EX-NO-7-Implement-DES-Encryption
+# EX-NO-6-Pseudo-Random-Number
 
-## Aim:
+# AIM: 
+Implementation of Pseudorandom Number Generation Using Standard library
 
-To use the Data Encryption Standard (DES) algorithm for a practical application, such as securing sensitive data transmission in financial transactions.
+# ALGORITHM:
+1.Start the program and import the required libraries.
 
-## ALGORITHM:
+2.Seed the random number generator using the current time (i.e) rand(time(0));
 
-1. DES is based on a symmetric key encryption technique that encrypts data in 64-bit blocks.
-2. DES uses a Feistel network structure with 16 rounds of processing for encryption.
-3. DES has a 64-bit key, but only 56 bits are used for encryption (the remaining 8 bits are for parity).
-4. DES applies initial and final permutations along with 16 rounds of substitution and permutation transformations to produce ciphertext.
+3.Get the number of random numbers to generate.
 
-## Program:
+4.Pass the value for number of iterations and print the numbers.
+
+5.End the program.
+
+# PROGRAM:
+```c
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+int main() 
+{
+    int count, min, max;
+    printf("Enter the number of random numbers to generate: ");
+    scanf("%d", &count);
+    printf("Enter the minimum value: ");
+    
+    scanf("%d", &min);
+    printf("Enter the maximum value: ");
+    scanf("%d", &max);
+    srand(time(NULL));
+    printf("Pseudorandom numbers:\n");   
+    for (int i = 0; i < count; i++) 
+    {
+        int random_number = (rand() % (max - min + 1)) + min;
+        printf("%d\n", random_number);
+    }return 0;
+}
+```
+
+# OUTPUT:
+![image](https://github.com/user-attachments/assets/61f446f5-8126-4f54-8bc2-fc866ca138f3)
 
 
-
-
-## Output:
-
-
-## Result:
-  The program is executed successfully
-
+# RESULT:
+The Implementation of Pseudorandom Number Generation Using Standard library issuccessful.
